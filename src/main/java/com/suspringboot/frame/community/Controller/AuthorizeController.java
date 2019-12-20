@@ -1,15 +1,21 @@
-package com.springforum.suforum.Controller;
+package com.suspringboot.frame.community.Controller;
 
-import com.springforum.suforum.Provider.GithubProvider;
-import com.springforum.suforum.dto.AccesstokenDTO;
-import com.springforum.suforum.dto.GithubUser;
+import com.suspringboot.frame.community.Provider.GithubProvider;
+import com.suspringboot.frame.community.dto.AccesstokenDTO;
+import com.suspringboot.frame.community.dto.GithubUser;
+import com.suspringboot.frame.community.mapper.UserMapper;
+
+import com.suspringboot.frame.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
 
 /**
  * 转发
@@ -28,12 +34,15 @@ public class AuthorizeController {
     @Value("${github.client.url}")
     private String clientUri;
 
+    @Autowired
+    private UserMapper userMapper;
 //token= 355e99ba55e4a7546dba7f53d3ed3de26d460e9a
 //转换到callback页面进行处理
     @GetMapping("/callback")
     public String Callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request) {
+                           HttpServletRequest request,
+                           HttpServletResponse response) {
         AccesstokenDTO accesstokenDTO = new AccesstokenDTO();
         accesstokenDTO.setClient_id(clientId);
         accesstokenDTO.setCode(code);
@@ -42,10 +51,19 @@ public class AuthorizeController {
         accesstokenDTO.setState(state);
         String accessToken = githubProvider.getAccesstoken(accesstokenDTO);
 
-        GithubUser user = githubProvider.getUser(accessToken);
-        if(user!=null){
+        GithubUser githubUser  = githubProvider.getUser(accessToken);
+        if(githubUser!=null){
+           User user=new User();
+           String token=UUID.randomUUID().toString();
+            user.setToken(token);
+            user.setName(githubUser.getName());
+            user.setAccountId(githubUser.getId());
+            user.setGmtcreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtcreate());
+            response.addCookie(new Cookie("token",token));
+           // userMapper.insert(user);
             //登录成功
-            request.getSession().setAttribute("user",user);
+            request.getSession().setAttribute("user",githubUser);
             return  "redirect:/";
         }else {
             return  "redirect:/";

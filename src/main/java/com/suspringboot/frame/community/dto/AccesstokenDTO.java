@@ -1,4 +1,4 @@
-package com.springforum.suforum.dto;
+package com.suspringboot.frame.community.dto;
 
 /**
  * accesstoken值的传入

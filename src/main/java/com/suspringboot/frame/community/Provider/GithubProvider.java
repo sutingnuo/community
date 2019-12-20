@@ -1,8 +1,9 @@
-package com.springforum.suforum.Provider;
+package com.suspringboot.frame.community.Provider;
 
 import com.alibaba.fastjson.JSON;
-import com.springforum.suforum.dto.AccesstokenDTO;
-import com.springforum.suforum.dto.GithubUser;
+
+import com.suspringboot.frame.community.dto.AccesstokenDTO;
+import com.suspringboot.frame.community.dto.GithubUser;
 import okhttp3.*;
 
 import org.springframework.stereotype.Component;

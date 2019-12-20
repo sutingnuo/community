@@ -1,4 +1,4 @@
-package com.springforum.suforum.Controller;
+package com.suspringboot.frame.community.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 /**
