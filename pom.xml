@@ -78,25 +78,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <plugin>
-                <groupId>org.flywaydb</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>6.1.3</version>
-                <configuration>
-                    <url> jdbc:mysql://localhost:3306/webusertest?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;zeroDateTimeBehavior=CONVERT_TO_NULL</url>
-                    <user>root</user>
-                    <password>123456</password>
-                </configuration>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>8.0.18</version>
-                    </dependency>
-                </dependencies>
-
-                </plugin>
 
 
         </plugins>

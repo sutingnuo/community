@@ -44,6 +44,18 @@ public class User {
         return gmtCreate;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", accountId=" + accountId +
+                ", token='" + token + '\'' +
+                ", gmtCreate=" + gmtCreate +
+                ", gmtModified=" + gmtModified +
+                '}';
+    }
+
     public void setGmtcreate(Long gmtcreate) {
         this.gmtCreate = gmtcreate;
     }

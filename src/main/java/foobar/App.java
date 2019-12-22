@@ -7,14 +7,10 @@ public class App {
 
 
     public static void main(String[] args) {
-        // Create the Flyway instance and point it to the database
-        App app=new App();
-        app.createtable();
-
-    }
-    public  void createtable(){
         Flyway flyway = Flyway.configure().dataSource( "jdbc:mysql://localhost:3306/webusertest?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai&zeroDateTimeBehavior=CONVERT_TO_NULL","root","123456").load();
         // Start the migration
         flyway.migrate();
+
     }
+
 }
