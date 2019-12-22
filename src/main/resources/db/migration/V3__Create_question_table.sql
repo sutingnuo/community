@@ -1,3 +1,4 @@
+ drop table question;
 create  table question(
 id int auto_increment primary key ,
 title varchar(50),
