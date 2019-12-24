@@ -1,2 +1,2 @@
 
-Alter table frameuser add bio varchar(256) null;
+Alter table frameUser add bio varchar(256) null;

@@ -1,8 +1,8 @@
 
 
-drop table frameuser;
+drop table frameUser;
 create table frameUser(
-      id int auto_increment primary key,
+      id Integer auto_increment primary key,
       account_id varchar(100),
       name varchar(50),
       token char(36),

@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
- * 转发
  * 登录后会将转回index
  * 对账户的处理
  * 代码整理：宋甜宁
@@ -58,8 +57,9 @@ public class AuthorizeController {
             user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(githubUser.getId());
-            user.setGmtcreate(System.currentTimeMillis());
-            user.setGmtModified(user.getGmtcreate());
+            user.setGmtCreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreate());
+            user.setAvatar_url(githubUser.getAvatar_url());
             response.addCookie(new Cookie("token",token));
             userMapper.insert(user);
             //登录成功
