@@ -5,18 +5,18 @@
     <meta charset="UTF-8">
     <title>小苏社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="/css/ll.css">
-    <script href="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
+    <script src="js/bootstrap.min.js"  type="application/javascript"></script>
 
+    <link rel="stylesheet" href="/css/ll.css">
 </head>
 <body>
 <!--导航条-->
 <div th:replace=" thymeleafHtml :: header"></div>
 <!--正文-->
-
-
 <div layout:fragment="content">
     <div class="container-fluid main">
         <div class="row ">
@@ -26,18 +26,56 @@
                 <h2><span class="glyphicon glyphicon-list" aria-hidden="true"></span>发现</h2>
                 <hr>
 
-                <div class="media">
+                <div class="media" th:each="question : ${pagination.questions}">
                     <div class="media-left">
                         <a href="#">
-                            <img class="media-object img-rounded img-redix" src="https://avatars3.githubusercontent.com/u/49639313?v=4" alt="...">
+                            <img class="media-object img-rounded img-redix"
+                                 th:src="${question.user.avatar_url}">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading">怎么学会spring boot 开发</h4>
-                        啦啦啦啦啦啦啦<br>
-                        <span class="text-desc">2个回复 31次浏览 1小时前</span>
+                        <h4 class="media-heading" th:text="${question.title}"></h4>
+                        <span th:text="${question.description}"></span> <br>
+                        <span class="text-desc">
+                                ☆<span th:text="${question.comment_count}"></span>个回复
+                                ☆<span th:text="${question.view_count}"></span>次浏览
+                                ☆<span th:text="${#dates.format(question.gmt_create,'yyyy年MM月dd日')}"></span>创建
+                          </span>
                     </div>
                 </div>
+
+                <!--页码-->
+                <nav aria-label="Page navigation ">
+                    <ul class="pagination btn-publish">
+
+                        <li th:if="${pagination.showFistpage}">
+                            <a href="#" aria-label="Previous" th:href="@{/(page=1)}">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+
+                        <li th:if="${pagination.showPrevious}">
+                            <a href="#" aria-label="Previous" th:href="@{/(page=${pagination.page-1})}" >
+                                <span aria-hidden="true">&lt;</span>
+                            </a>
+                        </li>
+                        <li th:each="page : ${pagination.pages} " th:class="${pagination.page==page}?'active':''">
+                        <a href="#" th:href="@{/(page=${page})}" th:text="${page}"></a>
+                        </li>
+
+                        <li th:if="${pagination.showNext}">
+                            <a href="#" aria-label="Previous" th:href="@{/(page=${pagination.page+1})}">
+                                <span aria-hidden="true">&gt;</span>
+                            </a>
+                        </li>
+                        <li th:if="${pagination.showEndPag}">
+                            <a href="#" aria-label="Next" th:href="@{/(page=${pagination.totalPage})}">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
             </div>
 
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="background-color:white ">
@@ -51,4 +89,5 @@
 
 
 </body>
+
 </html>

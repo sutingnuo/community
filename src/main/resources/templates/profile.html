@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${sectionName}"></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+
+    <link rel="stylesheet" href="/css/ll.css">
+
+</head>
+<body>
+<!--导航条-->
+<div th:replace=" thymeleafHtml :: header"></div>
+<!--正文-->
+<div layout:fragment="content">
+    <div class="container-fluid main">
+        <div class="row ">
+
+
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="background-color: white">
+                <h2><span th:text="${sectionName}"></span></h2>
+                <hr>
+                <!--
+                             <div class="media" th:each="question : ${pagination.questions}">
+                                 <div class="media-left">
+                                     <a href="#">
+                                         <img class="media-object img-rounded img-redix"
+                                              th:src="${question.user.avatar_url}">
+                                     </a>
+                                 </div>
+                                 <div class="media-body">
+                                     <h4 class="media-heading" th:text="${question.title}"></h4>
+                                     <span th:text="${question.description}"></span> <br>
+                                     <span class="text-desc">
+                                             ☆<span th:text="${question.comment_count}"></span>个回复
+                                             ☆<span th:text="${question.view_count}"></span>次浏览
+                                             ☆<span th:text="${#dates.format(question.gmt_create,'yyyy年MM月dd日')}"></span>创建
+                                       </span>
+                                 </div>
+                             </div>
+             -->
+                <!--页码-->
+                <!--    <nav aria-label="Page navigation ">
+                        <ul class="pagination btn-publish">
+
+                            <li th:if="${pagination.showFistpage}">
+                                <a href="#" aria-label="Previous" th:href="@{/(page=1)}">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+
+                            <li th:if="${pagination.showPrevious}">
+                                <a href="#" aria-label="Previous" th:href="@{/(page=${pagination.page-1})}" >
+                                    <span aria-hidden="true">&lt;</span>
+                                </a>
+                            </li>
+                            <li th:each="page : ${pagination.pages} " th:class="${pagination.page==page}?'active':''">
+                                <a href="#" th:href="@{/(page=${page})}" th:text="${page}"></a>
+                            </li>
+
+                            <li th:if="${pagination.showNext}">
+                                <a href="#" aria-label="Previous" th:href="@{/(page=${pagination.page+1})}">
+                                    <span aria-hidden="true">&gt;</span>
+                                </a>
+                            </li>
+                            <li th:if="${pagination.showEndPag}">
+                                <a href="#" aria-label="Next" th:href="@{/(page=${pagination.totalPage})}">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+    -->
+            </div>
+
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12" style="background-color:white ">
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item" th:class="${section=='questions'}?'active':''">我的问题</a>
+                    <a href="#" class="list-group-item" th:class="${section=='repies'}?'active':''">
+                        最新回复
+                        <span class="badge">14</span>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
