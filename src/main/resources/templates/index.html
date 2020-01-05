@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <title>小苏社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-
+    <link rel="stylesheet" href="/css/ll.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
-    <script src="js/bootstrap.min.js"  type="application/javascript"></script>
-    <link rel="stylesheet" href="/css/ll.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+
 </head>
-<body>
+<body style="background-color:#efefef">
 <!--导航条-->
 <div th:replace=" thymeleafHtml :: header"></div>
 <!--正文-->
@@ -33,7 +33,11 @@
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading" th:text="${question.title}"></h4>
+                        <h4 class="media-heading">
+                            <a th:href="@{'/question/'+${question.id}}" th:text="${question.title}">
+
+                            </a>
+                        </h4>
                         <span th:text="${question.description}"></span> <br>
                         <span class="text-desc">
                                 ☆<span th:text="${question.comment_count}"></span>个回复
@@ -54,12 +58,12 @@
                         </li>
 
                         <li th:if="${pagination.showPrevious}">
-                            <a href="#" aria-label="Previous" th:href="@{/(page=${pagination.page-1})}" >
+                            <a href="#" aria-label="Previous" th:href="@{/(page=${pagination.page-1})}">
                                 <span aria-hidden="true">&lt;</span>
                             </a>
                         </li>
                         <li th:each="page : ${pagination.pages} " th:class="${pagination.page==page}?'active':''">
-                        <a href="#" th:href="@{/(page=${page})}" th:text="${page}"></a>
+                            <a th:href="@{/(page=${page})}" th:text="${page}"></a>
                         </li>
 
                         <li th:if="${pagination.showNext}">

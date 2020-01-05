@@ -8,14 +8,14 @@
 
     <title>SpringBoot模版渲染</title>
 
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/ll.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script>
-    <script src="js/bootstrap.min.js" type="application/javascript" ></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
 
 </head>
-<body>
+<body style="background-color:#efefef">
 <!--头部导航条-->
 <div class="top_user" th:fragment="header">
     <nav class="navbar navbar-default">
@@ -50,7 +50,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="/profile/questions">我的问题</a></li>
                                 <li><a href="#">个人资料</a></li>
-                                <li><a href="#">退出登录</a></li>
+                                <li><a href="/logout">退出登录</a></li>
                             </ul>
                     </li>
                     <li th:if="${session.user==null}">

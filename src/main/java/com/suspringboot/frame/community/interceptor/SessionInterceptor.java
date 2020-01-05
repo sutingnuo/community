@@ -1,18 +1,39 @@
 package com.suspringboot.frame.community.interceptor;
 
+import com.suspringboot.frame.community.mapper.UserMapper;
+import com.suspringboot.frame.community.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+@Service
 public class SessionInterceptor implements HandlerInterceptor {
-
-
+   @Autowired
+    UserMapper userMapper;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        return false;
+
+        //检验登录状态
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    String token = cookie.getValue();
+
+                    User user = userMapper.findByToken(token);
+                    if (user != null) {
+                        request.getSession().setAttribute("user", user);
+                    }
+                    break;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
@@ -25,7 +46,5 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     }
 
-    public HandlerInterceptor addPathPatterns(String s) {
-        return null;
-    }
+
 }

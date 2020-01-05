@@ -29,33 +29,21 @@ public class ProfileController {
                           Model model,
                           @RequestParam(name = "page", defaultValue = "1") Integer page,
                           @RequestParam(name = "size", defaultValue = "5") Integer size) {
-        User user = null;
-        //检验登录状态
-        Cookie[] cookies = request.getCookies();
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("token")) {
-                    String token = cookie.getValue();
-                    user = userMapper.findByToken(token);
-                    if (user != null) {
-                        request.getSession().setAttribute("user", user);
-                    }
-                    break;
-                }
-            }
-        }
-        if (user == null) {
-            return "redirect:/";
-        }
+        User user = (User) request.getSession().getAttribute("user");
+
+
+      if (user!=null){
         if ("questions".equals(action)) {
             model.addAttribute("section", "questions");
             model.addAttribute("sectionName", "我的提问");
+            PaginationDTO pagination = questionService.listquestion(user.getId(), page, size);
+            model.addAttribute("pagination", pagination);
+            return "profile";
         } else if ("repies".equals(action)) {
             model.addAttribute("section", "repies");
             model.addAttribute("sectionName", "最新回复");
         }
-        PaginationDTO pagination= questionService.listquestion(user.getId(), page, size) ;
-        model.addAttribute("pagination",pagination);
-        return "profile";
+      }
+        return "redirect:/";
     }
 }
