@@ -8,8 +8,10 @@
 ##参照网站  
 [码匠网站](http://www.mawen.co/)  
 
-##自己布局整理及参照学习文档
-[Thymeleaf]( https://www.cnblogs.com/ityouknow/p/5833560.html)
+
+##maven命令
+mybatis的命令  
+mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 
     
 
