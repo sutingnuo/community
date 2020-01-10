@@ -3,7 +3,7 @@ package com.suspringboot.frame.community.Controller;
 import com.suspringboot.frame.community.Provider.GithubProvider;
 import com.suspringboot.frame.community.dto.AccesstokenDTO;
 import com.suspringboot.frame.community.dto.GithubUser;
-;
+
 
 import com.suspringboot.frame.community.model.User;
 import com.suspringboot.frame.community.service.UserService;
@@ -43,7 +43,7 @@ public class AuthorizeController {
     public String Callback(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
                            HttpServletRequest request,
-                           HttpServletResponse response, Model model) {
+                           HttpServletResponse response) {
         AccesstokenDTO accesstokenDTO = new AccesstokenDTO();
         accesstokenDTO.setClient_id(clientId);
         accesstokenDTO.setCode(code);

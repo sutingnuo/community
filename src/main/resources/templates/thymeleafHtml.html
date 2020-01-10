@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <html class="no-js" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -53,7 +52,7 @@
                                 <li><a href="/logout">退出登录</a></li>
                             </ul>
                     </li>
-                    <li th:if="${session.user==null}">
+                    <li th:if="${session.user ==null}">
                         <a href="https://github.com/login/oauth/authorize?client_id=a4bcb4cfa246e7dc4f61&redirect_uri=http://localhost:8080/callback&scope=user&state=1">登录</a>
                     </li>
 

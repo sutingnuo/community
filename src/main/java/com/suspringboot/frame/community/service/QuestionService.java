@@ -89,11 +89,15 @@ public class QuestionService {
 
     public void CreateOrUpdate(Question question) {
         if (question.getId() == null) {
+            question.setComment_count(0);
+            question.setView_count(0);
+            question.setLike_count(0);
             question.setGmt_create(System.currentTimeMillis());
             question.setGmt_modified(question.getGmt_create());
             questionMapper.insert(question);
         } else {
             Question updateQuestion = new Question();
+
             updateQuestion.setTitle(question.getTitle());
             updateQuestion.setDescription(question.getDescription());
             updateQuestion.setTag(question.getTag());

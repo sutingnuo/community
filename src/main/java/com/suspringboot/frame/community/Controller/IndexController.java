@@ -33,6 +33,7 @@ public class IndexController {
 
         //查询信息
        PaginationDTO pagination=questionService.listquestion(page,size);
+
         model.addAttribute("pagination",pagination);
         return "index";
 
